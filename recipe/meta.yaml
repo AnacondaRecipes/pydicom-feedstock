@@ -17,14 +17,10 @@ requirements:
   host:
     - python
     - pip
-    - wheel
-    - setuptools
-    - setuptools-scm
     - flit-core >=3.2,<4
 
   run:
     - python
-    - flit-core
 
 test:
   source_files:

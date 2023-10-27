@@ -24,6 +24,7 @@ requirements:
 
   run:
     - python
+    - flit-core
 
 test:
   source_files:
@@ -33,7 +34,6 @@ test:
   requires:
     - pip
     - pytest
-    - flit-core
   commands:
     - pip check
     - pytest pydicom/tests

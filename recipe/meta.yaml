@@ -1,38 +1,43 @@
 {% set name = "pydicom" %}
 {% set version = "2.4.3" %}
-{% set sha256 = "ffb8d729fcaacf7a3aca243c69fa342305d2696ec59c1f930b2e564d4f1b5fbd" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
   url: https://github.com/pydicom/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  sha256: ffb8d729fcaacf7a3aca243c69fa342305d2696ec59c1f930b2e564d4f1b5fbd
 
 build:
-  noarch: python
   number: 0
-  script: {{ PYTHON }} -m pip install . --no-deps -vv
+  script: {{ PYTHON }} -m pip install --no-deps --no-deps --no-build-isolation -vv .
+  entry_points:
+    - pydicom = pydicom.cli.main:main
 
 requirements:
   host:
-    - python >=3.7
+    - python
     - pip
-    - flit-core
+    - flit-core >=3.2,<4
 
   run:
-    - python >=3.7
+    - python
 
 test:
+  source_files:
+    - pydicom/tests
   imports:
     - pydicom
   requires:
-    - flit-core
+    - pip
+    - pytest
+  commands:
+    - pip check
+    - pytest pydicom/tests
 
 about:
-  home: http://github.com/pydicom/pydicom
+  home: https://github.com/pydicom/pydicom
   license: MIT
   license_family: MIT
   license_file: LICENSE

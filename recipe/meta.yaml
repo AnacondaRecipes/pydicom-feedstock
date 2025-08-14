@@ -29,6 +29,7 @@ test:
   source_files:
     - pyproject.toml
     - tests
+    - src
   imports:
     - src.pydicom
   requires:

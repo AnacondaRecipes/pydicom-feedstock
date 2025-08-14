@@ -45,7 +45,7 @@ test:
     - pytest
   commands:
     - pip check
-    - pytest tests -k "not {{ skip_test }}"
+    - pytest tests -k "not ({{ skip_test }})"
 
 about:
   home: https://github.com/pydicom/pydicom

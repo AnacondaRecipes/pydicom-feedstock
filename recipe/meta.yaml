@@ -1,6 +1,9 @@
 {% set name = "pydicom" %}
 {% set version = "3.0.1" %}
-
+# AssertionError: Regex pattern did not match.
+# Regex: "Error deepcopying the buffered element \\(7FE0,0010\\) 'Pixel Data': cannot (.*) '_io.BufferedReader' object"
+# Input: "Error deepcopying the buffered element (7FE0,0010) 'Pixel Data': cannot pickle 'BufferedReader' instances"
+{% set skip_test = "test_deepcopy_bufferedreader_raises" %}
 package:
   name: {{ name|lower }}
   version: {{ version }}
@@ -37,7 +40,7 @@ test:
     - pytest
   commands:
     - pip check
-    - pytest tests
+    - pytest tests -k "not {{ skip_test }}"
 
 about:
   home: https://github.com/pydicom/pydicom

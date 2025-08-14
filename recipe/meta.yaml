@@ -1,17 +1,18 @@
 {% set name = "pydicom" %}
-{% set version = "2.4.3" %}
+{% set version = "3.0.1" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://github.com/pydicom/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: ffb8d729fcaacf7a3aca243c69fa342305d2696ec59c1f930b2e564d4f1b5fbd
+  url: https://github.com/{{ name }}/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 848ae8e36f34750cf837e48ca5cdf6f7a472145724946d5f28f529279fe11f4e
 
 build:
   number: 0
-  script: {{ PYTHON }} -m pip install --no-deps --no-deps --no-build-isolation -vv .
+  skip: True # [py<310]
+  script: {{ PYTHON }} -m pip install --no-deps --no-build-isolation -vv .
   entry_points:
     - pydicom = pydicom.cli.main:main
 
@@ -26,15 +27,16 @@ requirements:
 
 test:
   source_files:
-    - pydicom/tests
+    - pyproject.toml
+    - tests
   imports:
-    - pydicom
+    - src.pydicom
   requires:
     - pip
     - pytest
   commands:
     - pip check
-    - pytest pydicom/tests
+    - pytest tests
 
 about:
   home: https://github.com/pydicom/pydicom

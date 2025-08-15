@@ -45,6 +45,8 @@ test:
     - pytest
   commands:
     - pip check
+    - python -c "from importlib.metadata import version; assert version('{{ name }}') == '{{ version }}'"
+    - pydicom --help
     - pytest tests -k "not ({{ skip_test }})"
 
 about:

@@ -1,14 +1,15 @@
 {% set name = "pydicom" %}
 {% set version = "3.0.2" %}
-{% set skip_test = "test_deepcopy_bufferedreader_raises " %}
-{% set skip_test = skip_test + "or test_no_absolute_path_in_get_testdata_file " %}  # [win]
-{% set skip_test = skip_test + "or test_no_absolute_path_in_get_testdata_files " %}  # [win]
 
 # AssertionError: Regex pattern did not match.
 # Regex: "Error deepcopying the buffered element \\(7FE0,0010\\) 'Pixel Data': cannot (.*) '_io.BufferedReader' object"
 # Input: "Error deepcopying the buffered element (7FE0,0010) 'Pixel Data': cannot pickle 'BufferedReader' instances"
+{% set skip_test = "test_deepcopy_bufferedreader_raises " %}
 # raise NotImplementedError("Non-relative patterns are unsupported")
 # NotImplementedError: Non-relative patterns are unsupported
+{% set skip_test = skip_test + "or test_no_absolute_path_in_get_testdata_file " %}  # [win]
+{% set skip_test = skip_test + "or test_no_absolute_path_in_get_testdata_files " %} # [win]
+
 package:
   name: {{ name|lower }}
   version: {{ version }}

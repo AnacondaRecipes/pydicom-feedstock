@@ -9,6 +9,9 @@
 # NotImplementedError: Non-relative patterns are unsupported
 {% set skip_test = skip_test + "or test_no_absolute_path_in_get_testdata_file " %}  # [win]
 {% set skip_test = skip_test + "or test_no_absolute_path_in_get_testdata_files " %} # [win]
+# E       Failed: DID NOT RAISE <class 'PermissionError'>
+# fails on Windows 3.12, 3.13, 3.14
+{% set skip_test = skip_test + "or test_constrained_to_fileset_root " %} # [win]
 
 package:
   name: {{ name|lower }}
